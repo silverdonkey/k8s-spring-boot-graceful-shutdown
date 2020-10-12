@@ -23,7 +23,11 @@ public class GenericEntityController {
     @RequestMapping(value = "/entity/all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE} )
     public List<GenericEntity> findAll() {
         // simulate slow response
-        // Thread.sleep(5000);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return entityList;
     }
 
