@@ -24,6 +24,9 @@ spec:
       title: Swagger Spring Boot Demo
       license:
         name: MIT
+    servers:
+      - url: http://localhost:8080
+      
     paths:
       /entity/all:
         get:
