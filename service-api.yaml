@@ -101,8 +101,6 @@ spec:
               format: int64
             value:
               type: string
-            tag:
-              type: string
         GenericEntities:
           type: array
           items:
