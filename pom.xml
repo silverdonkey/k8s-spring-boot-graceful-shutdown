@@ -15,7 +15,7 @@
 	<description>Demo project for Spring Boot graceful shutdown configuration in K8S environment</description>
 
 	<properties>
-		<java.version>8</java.version>
+		<java.version>12</java.version>
 	</properties>
 
 	<dependencies>
