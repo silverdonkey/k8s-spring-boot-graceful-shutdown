@@ -3,6 +3,7 @@ This is a simple project which demonstrates the pitfalls with the graceful shutd
 - Alpine Linux with JRE-8
 - Spring Boot 2.3.4
 - InteliJ
+- Using a [shell as pre-start hook](java-run.sh) to start the spring-boot app. The [exec](https://en.wikipedia.org/wiki/Exec_(system_call)) is very important there!
 
 # Build Docker Image and run it
 
