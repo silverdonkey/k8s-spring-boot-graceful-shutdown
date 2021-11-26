@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "Using a shell as a pre-start hook."
 echo "You can run scripts before starting your java app... (e.g. import SSL certificates)"

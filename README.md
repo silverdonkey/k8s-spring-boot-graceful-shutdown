@@ -3,7 +3,7 @@ This is a simple project which demonstrates the pitfalls with the graceful shutd
 - Alpine Linux with JRE-8
 - Spring Boot 2.3.4
 - InteliJ
-- Using a [shell as pre-start hook](java-run.sh) to start the spring-boot app. The [exec](https://en.wikipedia.org/wiki/Exec_(system_call)) is very important there!
+- Using a [shell as pre-start hook](java-run.sh) to start the spring-boot app. The [exec](https://en.wikipedia.org/wiki/Exec_(system_call)) portion of the bash command is important because it replaces the bash process with your server, so that the shell only exists momentarily at start!
 - Use "docker stop < container-id >" to send SIGTERM signal to the container
 - Look at the logs and watch for "[extShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete" 
 - Check the exist status of the containers ('Exiited (143)' means 'gracefully terminated' while 'Exited (137)' means 'killed')

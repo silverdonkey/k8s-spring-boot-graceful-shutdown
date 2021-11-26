@@ -1,0 +1,19 @@
+FROM openjdk:12-jdk-alpine
+
+RUN apk add --no-cache bash dumb-init
+
+RUN mkdir -p /app
+#COPY java-run.sh /app
+#RUN chmod +x /app/java-run.sh
+
+# Add our service
+COPY target/*.jar /app/application.jar
+
+WORKDIR /app
+
+# run application with this command line
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+#CMD ["bash", "-c", "do-some-pre-start-thing && exec my-server"]
+# The 'exec' portion of the bash command is important because it replaces the bash process with your server, so that the shell only exists momentarily at start!
+CMD ["bash", "-c", "echo 'Using dumb-init as entrypoint and a shell script as a pre-start hook and then starting spring-boot...' && exec $JAVA_HOME/bin/java $JAVA_OPTIONS -jar /app/application.jar $@"]
+#CMD ["/app/java-run.sh"]
