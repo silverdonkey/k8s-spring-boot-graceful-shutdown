@@ -1,7 +1,7 @@
-# Conainerized Spring Boot app - graceful shutdown Demo 
+# Containerized Spring Boot app - graceful shutdown Demo 
 This is a simple project which demonstrates the pitfalls with the graceful shutdown configuration in a Spring Boot microservice deployt as Docker container. 
-- Alpine Linux with JRE-8
-- Spring Boot 2.3.4
+- Alpine Linux with JDK-18
+- Spring Boot 2.7.4
 - InteliJ
 - Using a [shell as pre-start hook](java-run.sh) to start the spring-boot app. The [exec](https://en.wikipedia.org/wiki/Exec_(system_call)) portion of the bash command is important because it replaces the bash process with your server, so that the shell only exists momentarily at start!
 - Use "docker stop < container-id >" to send SIGTERM signal to the container
