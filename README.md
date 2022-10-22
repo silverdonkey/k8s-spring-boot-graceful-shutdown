@@ -14,6 +14,8 @@ This is a simple project which demonstrates the pitfalls with the graceful shutd
 - Demo impl with using a static Linux lib 'dumb-init' as a Docker Entrypoint: for more information go to [dumb-init for docker](https://engineeringblog.yelp.com/2016/01/dumb-init-an-init-for-docker.html) or check [dumb-init on GitHub](https://github.com/Yelp/dumb-init)
 
 # Build Docker Image and Run It
+Build the jar file with Maven
+- "mvn clean verify"
 
 Build both images
 - "docker build -t k8s-spring-boot-app-graceful:1.0.0 ."
