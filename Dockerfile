@@ -12,5 +12,5 @@ COPY target/*.jar /app/application.jar
 WORKDIR /app
 
 # run application with this command line
-#CMD ["/usr/bin/java", "-jar", "-Dspring.profiles.active=default", "/app/application.jar"]
+#CMD ["/opt/openjdk-18/bin/java", "-jar", "-Dspring.profiles.active=default", "/app/application.jar"]
 ENTRYPOINT ["/app/java-run.sh"]
