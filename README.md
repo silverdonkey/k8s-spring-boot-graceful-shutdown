@@ -25,6 +25,10 @@ Build both images
 
 Do these steps with both containers
 - "docker run -d -p 8080:8080 k8s-spring-boot-app-graceful:1.0.0"
+- Security considerations: 
+  - Start the container with RO option and /tmp dir: 
+  - "docker run -d -p 8080:8080 **--read-only --tmpfs /tmp** k8s-spring-boot-app-graceful:1.0.0"
+   - optional (if in Dockerfile not set): "--user $(id -u):$(id -g)"
 - "docker ps -a"
 - Go to your Browser and open http://localhost:8080/entity/all
 - "docker logs < container-id >"
