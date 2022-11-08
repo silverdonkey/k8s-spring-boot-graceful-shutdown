@@ -9,8 +9,14 @@ RUN chmod +x /app/java-run.sh
 # Add our service
 COPY target/*.jar /app/application.jar
 
-# Add a NON-root user to run the app
-RUN addgroup -S nonroot && adduser --disabled-password --system --uid 1000 --home /app --gecos "" -S nonroot -G nonroot && chown -R nonroot:nonroot /app
+# Add a NON-root system user to run the app
+# By default, system users are placed in the nogroup group.
+# The new system user will have the shell /bin/false (no shell)
+# and have logins disabled.
+# --shell /bin/false
+# --disabled-login
+RUN adduser --system --no-create-home --gecos "" --uid 1000 -S nonroot \
+    && chown -R nonroot /app
 
 USER nonroot
 WORKDIR /app
