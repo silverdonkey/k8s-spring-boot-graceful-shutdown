@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "Running as User: $(whoami)"
 echo "Using a shell as a pre-start hook."
 echo "You can run scripts before starting your java app (e.g. import SSL certificates)"
 echo "JAVA_HOME=$JAVA_HOME"
