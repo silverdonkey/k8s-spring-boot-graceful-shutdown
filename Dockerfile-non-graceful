@@ -9,6 +9,10 @@ RUN chmod +x /app/java-run-non-graceful.sh
 # Add our service
 COPY target/*.jar /app/application.jar
 
+# Add a NON-root user to run the app
+RUN addgroup -S nonroot && adduser --disabled-password --system --uid 1000 --home /app --gecos "" -S nonroot -G nonroot && chown -R nonroot:nonroot /app
+
+USER nonroot
 WORKDIR /app
 
 # run application with this command line
