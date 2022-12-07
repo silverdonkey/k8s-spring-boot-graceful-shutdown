@@ -3,11 +3,11 @@ FROM openjdk:18-jdk-alpine
 RUN apk add --no-cache bash
 
 RUN mkdir -p /app
-COPY java-run.sh /app
+ADD java-run.sh /app
 RUN chmod +x /app/java-run.sh
 
 # Add our service
-COPY target/*.jar /app/application.jar
+ADD target/*.jar /app/application.jar
 
 # Add a NON-root system user to run the app
 # By default, system users are placed in the nogroup group.
@@ -15,10 +15,21 @@ COPY target/*.jar /app/application.jar
 # and have logins disabled.
 # --shell /bin/false
 # --disabled-login
-RUN adduser --system --no-create-home --gecos "" --uid 1000 -S nonroot \
-    && chown -R nonroot /app
+ARG USERNAME=nonroot
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
 
-USER nonroot
+RUN addgroup --gid $USER_GID $USERNAME \
+    && adduser --system --no-create-home --gecos "" --uid 1000 -S $USERNAME \
+    && chown -R $USERNAME /app
+    #
+    # [Optional] Add sudo support. Omit if you don't need to install software after connecting.
+    # && apt-get update \
+    # && apt-get install -y sudo \
+    # && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    # && chmod 0440 /etc/sudoers.d/$USERNAME
+
+USER $USERNAME
 WORKDIR /app
 
 # run application with this command line
