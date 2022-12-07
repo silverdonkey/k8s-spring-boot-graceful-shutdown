@@ -3,11 +3,11 @@ FROM openjdk:18-jdk-alpine
 RUN apk add --no-cache bash
 
 RUN mkdir -p /app
-ADD java-run-non-graceful.sh /app
+COPY java-run-non-graceful.sh /app
 RUN chmod +x /app/java-run-non-graceful.sh
 
 # Add our service
-ADD target/*.jar /app/application.jar
+COPY target/*.jar /app/application.jar
 
 # Add a NON-root system user to run the app
 ARG USERNAME=nonroot

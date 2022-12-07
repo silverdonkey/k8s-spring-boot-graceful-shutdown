@@ -3,11 +3,11 @@ FROM openjdk:18-jdk-alpine
 RUN apk add --no-cache bash dumb-init
 
 RUN mkdir -p /app
-ADD java-run.sh /app
+COPY java-run.sh /app
 RUN chmod +x /app/java-run.sh
 
 # Add our service
-ADD target/*.jar /app/application.jar
+COPY target/*.jar /app/application.jar
 
 ARG USERNAME=nonroot
 ARG USER_UID=1000
