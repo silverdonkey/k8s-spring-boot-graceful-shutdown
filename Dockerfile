@@ -20,7 +20,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 RUN addgroup --gid $USER_GID $USERNAME \
-    && adduser --system --no-create-home --gecos "" --uid 1000 -S $USERNAME \
+    && adduser --system --no-create-home --gecos "" --uid $USER_UID -S $USERNAME \
     && chown -R $USERNAME /app
     #
     # [Optional] Add sudo support. Omit if you don't need to install software after connecting.
