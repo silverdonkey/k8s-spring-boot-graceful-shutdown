@@ -17,14 +17,16 @@ This is a simple project which demonstrates the pitfalls with the graceful shutd
 Build the jar file with Maven
 - "mvn clean verify"
 
-Build both images
+Build images (on Apple Silicon Mac add '--platform linux/amd64' right after the 'build' command):
 - "docker build -t k8s-spring-boot-app-graceful:1.0.0 ."
+  - on Apple Silicon Mac: "docker build --platform linux/amd64 -t k8s-spring-boot-app-graceful:1.0.0 ."
 - "docker build -t k8s-spring-boot-app-non-graceful:1.0.0 . -f Dockerfile-non-graceful"
 - "docker build -t k8s-spring-boot-app-graceful-dumb-init:1.0.0 . -f Dockerfile-graceful-dumb-init"
 - "docker image ls"
 
-Do these steps with both containers
+Run containers (on Apple Silicon Mac add '--platform linux/amd64' right after the 'run' command):
 - "docker run -d -p 8080:8080 k8s-spring-boot-app-graceful:1.0.0"
+  - on Apple Silicon Mac: "docker run --platform linux/amd64 -d -p 8080:8080 k8s-spring-boot-app-graceful:1.0.0"
 - To start the container securely pass these params **--read-only --tmpfs /tmp**: 
   - "docker run -d -p 8080:8080 --read-only --tmpfs /tmp k8s-spring-boot-app-graceful:1.0.0"
    - optional (if in Dockerfile not set): "--user $(id -u):$(id -g)"
