@@ -16,6 +16,7 @@ This is a simple project which demonstrates the pitfalls with the graceful shutd
 # Build and Run It 
 Build the jar file with Maven
 - "mvn clean verify"
+
 Start the app with Maven from the Terminal:
 - "mvn spring-boot:run"
 
