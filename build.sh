@@ -14,19 +14,22 @@ fi
 
 REPOSITORY='k8s-spring-boot-app'
 TAG=$1
+PLATFORM_FLAG=""
 
 case `uname -m` in
     "x86_64"*)
         SUPPORTED_ARCHITECTURE="x86_64/amd64"
-        echo "You are on $SUPPORTED_ARCHITECTURE" && ARCHITECTURE="x86_64"
+        echo "You are on $SUPPORTED_ARCHITECTURE"
+        PLATFORM_FLAG=""
         ;;
     "arm64"*)
         SUPPORTED_ARCHITECTURE="arm64"
-        echo "You are on $SUPPORTED_ARCHITECTURE" && ARCHITECTURE="arm64"
+        echo "You are on $SUPPORTED_ARCHITECTURE"
+        PLATFORM_FLAG="--platform linux/amd64"
         ;;
     *)
         SUPPORTED_ARCHITECTURE="unknown"
-        echo "The build script does not support your system architecture. Please build manually." && ARCHITECTURE="" && exit 1
+        echo "The build script does not support your system architecture. Please build manually." && exit 1
         ;;
 esac
 
@@ -55,16 +58,7 @@ function build_docker_images() {
     echo
 }
 
-PLATFORM_FLAG=""
 
-case $ARCHITECTURE in
-    "arm64"*)
-        PLATFORM_FLAG="--platform linux/amd64"
-        ;;
-      *)
-        PLATFORM_FLAG=""
-        ;;
-esac
 
 build_maven
-build_docker_images "$ARCHITECTURE" "$PLATFORM_FLAG"
+build_docker_images "$SUPPORTED_ARCHITECTURE" "$PLATFORM_FLAG"
