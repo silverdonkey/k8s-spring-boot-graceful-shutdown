@@ -107,8 +107,9 @@ Optional (if in Dockerfile not set) pass the current user: "--user $(id -u):$(id
 
 
 When finished with the demo: 
-- "docker system prune"
-- "docker image prune -a"
+
+    docker system prune
+    docker image prune -a
 
 
 
