@@ -58,7 +58,7 @@ Run the Docker build command and tag the images
     docker build -t k8s-spring-boot-app-graceful-dumb-init:1.0.0 . -f Dockerfile-graceful-dumb-init
     docker image ls
 
-## Run Containers on x86_64/AMD64 (Intel 64-bit)
+## Run Containers on x86_64/amd64 (Intel 64-bit)
 
 
     docker run -d -p 8080:8080 k8s-spring-boot-app-graceful:1.0.0
