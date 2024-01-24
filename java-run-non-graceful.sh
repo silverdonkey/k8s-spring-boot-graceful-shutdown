@@ -11,5 +11,5 @@ echo "$(java --version)"
 # graceful shutdown is not working since
 # only the shell script receives the SIGTERM command
 # but it doesn't propagates it to the java process
-echo "Now, java process is starting..."
+echo "Now, java process is being started..."
 $JAVA_HOME/bin/java $JAVA_OPTIONS -jar /app/application.jar $@

@@ -12,5 +12,5 @@ echo "$(java --version)"
 # only the shell script receives the SIGTERM command
 # but it doesn't propagate it to the java process.
 # so eventually the java process gets killed, which is not graceful ;)
-echo "Now, java process is executed..."
+echo "Now, java process is being executed..."
 exec $JAVA_HOME/bin/java $JAVA_OPTIONS -jar /app/application.jar $@
