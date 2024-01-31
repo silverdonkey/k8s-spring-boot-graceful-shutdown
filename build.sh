@@ -91,7 +91,7 @@ function build_docker_images() {
     local arch=$1
     local platform_flag=$2
     echo
-    echo "Building docker images on $archqq"
+    echo "Building docker images on $arch"
     echo
     docker build $platform_flag -t $REPOSITORY-graceful:$TAG . -f Dockerfile
     docker build $platform_flag -t $REPOSITORY-non-graceful:$TAG . -f Dockerfile-non-graceful
