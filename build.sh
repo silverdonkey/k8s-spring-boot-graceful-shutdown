@@ -3,10 +3,11 @@
 #set -eu
 
 help() {
-    echo "Build the project and create docker images for Demo"
+    echo "This script builds the Maven project and creates Docker images."
     echo
     echo "Usage $0 <tag>"
     echo "tag: The tag of docker images in the form '1.0.0' or 'latest'"
+    echo
 }
 
 if [ -z "$1" ]; then
@@ -14,9 +15,10 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-REPOSITORY='k8s-spring-boot-app'
-TAG=$1
-PLATFORM_FLAG=""
+DOCKER_REPOSITORY='k8s-spring-boot-app'
+DOCKER_TAG=$1
+DOCKER_PLATFORM_FLAG=""
+DOCKER_PLATFORM_FLAG_LINUX_AMD64="--platform linux/amd64"
 
 os=$(uname -s)
 arch=$(uname -m)
@@ -34,7 +36,7 @@ unsupported_arch() {
 }
 
 case $OS in
-#  CYGWIN* | MINGW64* | Windows*)
+  CYGWIN* | MINGW64* | Windows*)
 #    if [ $ARCH = "x86_64" ]
 #    then
 #      OS_ARCH=windows_amd64
@@ -42,7 +44,8 @@ case $OS in
 #    else
 #      unsupported_arch $OS $ARCH
 #    fi
-#    ;;
+    unsupported_arch $OS $ARCH
+    ;;
   Darwin)
     case $ARCH in
       x86_64|amd64)
@@ -50,7 +53,7 @@ case $OS in
         ;;
       arm64)
         OS_ARCH=darwin_arm64
-        PLATFORM_FLAG="--platform linux/amd64"
+        DOCKER_PLATFORM_FLAG="${DOCKER_PLATFORM_FLAG_LINUX_AMD64}"
         ;;
       *)
         unsupported_arch $OS $ARCH
@@ -64,7 +67,7 @@ case $OS in
         ;;
       arm64|aarch64)
         OS_ARCH=linux_arm64
-        PLATFORM_FLAG="--platform linux/amd64"
+        DOCKER_PLATFORM_FLAG="${DOCKER_PLATFORM_FLAG_LINUX_AMD64}"
         ;;
       *)
         unsupported_arch $OS $ARCH
@@ -91,17 +94,16 @@ function build_docker_images() {
     local arch=$1
     local platform_flag=$2
     echo
-    echo "Building docker images on $arch"
+    echo "Building Docker images on $arch"
     echo
-    docker build $platform_flag -t $REPOSITORY-graceful:$TAG . -f Dockerfile
-    docker build $platform_flag -t $REPOSITORY-non-graceful:$TAG . -f Dockerfile-non-graceful
-    docker build $platform_flag -t $REPOSITORY-graceful-dumb-init:$TAG . -f Dockerfile-graceful-dumb-init
+    docker build $platform_flag -t $DOCKER_REPOSITORY-graceful:$DOCKER_TAG . -f Dockerfile
+    docker build $platform_flag -t $DOCKER_REPOSITORY-non-graceful:$DOCKER_TAG . -f Dockerfile-non-graceful
+    docker build $platform_flag -t $DOCKER_REPOSITORY-graceful-dumb-init:$DOCKER_TAG . -f Dockerfile-graceful-dumb-init
     echo
     echo "Done! Docker images successfully created on $arch"
     echo
 }
 
-
-
 build_maven
-build_docker_images "$OS_ARCH" "$PLATFORM_FLAG"
+
+build_docker_images "$OS_ARCH" "$DOCKER_PLATFORM_FLAG"
