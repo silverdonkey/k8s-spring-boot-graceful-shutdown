@@ -48,3 +48,5 @@ jobs:
           git-release-bot-email: "silverdonkey@users.noreply.github.com"
           maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=false"
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
