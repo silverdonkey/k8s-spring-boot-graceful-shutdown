@@ -55,7 +55,8 @@ jobs:
           git config user.email "silverdonkey@users.noreply.github.com"
           git config user.name "SilverDonkey"
           mvn --batch-mode release:prepare release:perform -s $GITHUB_WORKSPACE/.m2/settings.xml
-          
+        env:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Publish to GitHub Packages Apache Maven
         run: mvn --batch-mode deploy -s $GITHUB_WORKSPACE/.m2/settings.xml
