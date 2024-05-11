@@ -24,6 +24,8 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+          settings-path: ${{ github.workspace }} # location for the settings.xml file
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package --file pom.xml
       - run: mkdir staging && cp target/*.jar staging
@@ -31,6 +33,10 @@ jobs:
         with:
           name: Package
           path: staging
+      - name: Publish to GitHub Packages Apache Maven
+        run: mvn --batch-mode deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
   release-publish:
     needs: build
@@ -41,12 +47,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Release and Publish to GitHub Packages
+      - name: Release
         uses: qcastel/github-actions-maven-release@master
         with:
           git-release-bot-name: "bot-silver"
           git-release-bot-email: "silverdonkey@users.noreply.github.com"
-          maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=false"
+          maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true"
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
