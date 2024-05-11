@@ -52,7 +52,7 @@ jobs:
 
       - name: Deploy release with Maven Release Plugin
         run: |
-          git config user.email "orozov@web.de"
+          git config user.email "silverdonkey@users.noreply.github.com"
           git config user.name "SilverDonkey"
           mvn --batch-mode release:prepare release:perform -s $GITHUB_WORKSPACE/.m2/settings.xml
           
