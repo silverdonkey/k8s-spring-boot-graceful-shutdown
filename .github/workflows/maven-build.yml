@@ -23,12 +23,14 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-
+          cache: maven
       - name: Build with Maven
-        run: mvn -B clean install --file pom.xml
-
-      - name: Test with Maven
-        run: mvn test
+        run: mvn --batch-mode --update-snapshots package --file pom.xml
+      - run: mkdir staging && cp target/*.jar staging
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Package
+          path: staging
 
   publish:
     needs: build
@@ -44,17 +46,18 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
+          cache: maven
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-          settings-path: ${{ github.workspace }} # location for the settings.xml file
+          settings-path: ${{ github.workspace }}/.m2 # location for the settings.xml file
 
       - name: Deploy release with Maven Release Plugin
         run: |
           git config user.email "orozov@web.de"
           git config user.name "SilverDonkey"
-          mvn --batch-mode release:prepare release:perform -Dusername=${{ secrets.GITHUB_ACTOR }} -Dpassword=${{ secrets.GITHUB_TOKEN }}
+          mvn --batch-mode release:prepare release:perform -s $GITHUB_WORKSPACE/.m2/settings.xml
           
 
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn --batch-mode deploy -s $GITHUB_WORKSPACE/settings.xml
+        run: mvn --batch-mode deploy -s $GITHUB_WORKSPACE/.m2/settings.xml
         env:
           GITHUB_TOKEN: ${{ github.token }}
