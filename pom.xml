@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>de.niko-consulting.demo</groupId>
 	<artifactId>k8s-spring-boot-graceful-shutdown</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>k8s-spring-boot-graceful-shutdown</name>
 	<description>Demo project for Spring Boot graceful shutdown configuration in K8S environment</description>
 
@@ -17,7 +17,7 @@
 		<url>git@github.com:silverdonkey/k8s-spring-boot-graceful-shutdown.git</url> <!-- URL HTTP de clone do projeto -->
 		<connection>scm:git:${project.scm.url}</connection> <!-- URL HTTP de clone do projeto -->
 		<developerConnection>scm:git:${project.scm.url}</developerConnection> <!-- URL HTTP de clone do projeto -->
-		<tag>1.0.0</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<properties>
