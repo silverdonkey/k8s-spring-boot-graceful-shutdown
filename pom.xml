@@ -15,7 +15,7 @@
 	<description>Demo project for Spring Boot graceful shutdown configuration in K8S environment</description>
 
 	<scm>
-		<url>https://github.com/silverdonkey/k8s-spring-boot-graceful-shutdown.git</url> <!-- URL HTTP de clone do projeto -->
+		<url>git@github.com:silverdonkey/k8s-spring-boot-graceful-shutdown.git</url> <!-- URL HTTP de clone do projeto -->
 		<connection>scm:git:${project.scm.url}</connection> <!-- URL HTTP de clone do projeto -->
 		<developerConnection>scm:git:${project.scm.url}</developerConnection> <!-- URL HTTP de clone do projeto -->
 		<tag>HEAD</tag>
