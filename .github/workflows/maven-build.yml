@@ -52,9 +52,8 @@ jobs:
 
       - name: Deploy release with Maven Release Plugin
         run: |
-          mvn --batch-mode release:clean release:prepare release:perform -s $GITHUB_WORKSPACE/settings.xml
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+          mvn --batch-mode release:clean release:prepare release:perform -Dusername=${{ github.actor }} -Dpassword=${{ github.token }}
+          
 
       - name: Publish to GitHub Packages Apache Maven
         run: mvn --batch-mode deploy -s $GITHUB_WORKSPACE/settings.xml
