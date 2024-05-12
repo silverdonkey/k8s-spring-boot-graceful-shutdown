@@ -1,9 +1,9 @@
 # Containerized Spring Boot App - graceful shutdown Demo 
 This is a simple project which demonstrates the pitfalls with the graceful shutdown configuration in a Spring Boot microservice deployed as Docker container. 
 - Amazon Corretto Alpine-based Linux with JDK-21
-- Spring Boot 3.2.2
-- Apache Maven 3.9.6
-- OpenJDK 21.0.1
+- Spring Boot 3.x
+- Apache Maven 3.x
+- OpenJDK 21.x
 - Using a [shell as pre-start hook](java-run.sh) to start the spring-boot app. The [exec](https://en.wikipedia.org/wiki/Exec_(system_call)) portion of the bash command is important because it replaces the bash process with your server, so that the shell only exists momentarily at start!
 
 # About Web Server Graceful Shutdown Feature in Spring Boot
