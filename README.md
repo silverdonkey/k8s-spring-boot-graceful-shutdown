@@ -112,6 +112,14 @@ When finished with the demo:
     docker image prune -a
 
 
+# Version Management with Maven
+Reference: [Version and Package Management](https://thihenos.medium.com/maven-release-plugin-a-simple-example-of-package-management-9926506acfb9)
 
+* [maven-release-plugin](http://maven.apache.org/maven-release/maven-release-plugin/index.html) 
+* TODO [build-helper-maven-plugin](http://www.mojohaus.org/build-helper-maven-plugin/)
 
+Version model <MAJOR.MINOR.PATCH>, where:
+* Major as an official release, 
+* Minor the bugfix fix and 
+* Patch any implementation or new **feature** that should be tested.
 
