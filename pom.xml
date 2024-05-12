@@ -66,6 +66,7 @@
 				<version>3.0.1</version> <!-- Adjust version as needed -->
 				<configuration>
 					<tagNameFormat>@{project.version}</tagNameFormat>
+					<scmCommentPrefix>[ci skip]</scmCommentPrefix>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
