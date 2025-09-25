@@ -1,4 +1,4 @@
-FROM amazoncorretto:21-alpine-jdk
+FROM amazoncorretto:25-alpine-jdk
 
 RUN apk add --no-cache bash dumb-init
 
